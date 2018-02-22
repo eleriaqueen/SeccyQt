@@ -35,7 +35,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
     sec_id_img.at(8).load(":/img/yellowboze.png");
     sec_id_img.at(9).load(":/img/whitill.png");
 
-    // ui->label_0->setText(pso_sec_id.at(pso_sum(arg1, 5)));
+    ui->label_0->setText(pso_sec_id.at(pso_sum(arg1, 5)));
     ui->label_1->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(0))));
     ui->label_2->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(1))));
     ui->label_3->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(2))));
