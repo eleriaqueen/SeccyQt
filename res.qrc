@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/blank.png</file>
+        <file>img/bluefull.png</file>
+        <file>img/greenill.png</file>
+        <file>img/oran.png</file>
+        <file>img/pinkal.png</file>
+        <file>img/purplenum.png</file>
+        <file>img/redria.png</file>
+        <file>img/seccyicon.png</file>
+        <file>img/seccytiny.ico</file>
+        <file>img/skyly.png</file>
+        <file>img/viridia.png</file>
+        <file>img/whitill.png</file>
+        <file>img/yellowboze.png</file>
+        <file>font/aldrich.ttf</file>
+    </qresource>
+</RCC>
