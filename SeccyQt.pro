@@ -37,3 +37,5 @@ DISTFILES += \
 
 RESOURCES += \
     res.qrc
+
+RC_ICONS = seccytiny.ico
