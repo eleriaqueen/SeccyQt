@@ -7,22 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::on_lineEdit_textChanged(const QString &arg1)
-{
-    int pso_legacy_classval = 5;
-    std::array<int, 12> psobb_classval = { 0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8 };
-    std::array<QString, 10> pso_sec_id = {"Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum","Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"};
-
-    QPixmap viridia_png, greenill_png, skyly_png, bluefull_png, purplenum_png, pinkal_png, redria_png, oran_png, yellowboze_png, whitill_png;
-    std::array<QPixmap, 10> sec_id_img = {viridia_png, greenill_png, skyly_png, bluefull_png, purplenum_png, pinkal_png, redria_png, oran_png, yellowboze_png, whitill_png};
+    sec_id_img = {viridia_png, greenill_png, skyly_png, bluefull_png, purplenum_png, pinkal_png, redria_png, oran_png, yellowboze_png, whitill_png};
 
     sec_id_img.at(0).load(":/img/viridia.png");
     sec_id_img.at(1).load(":/img/greenill.png");
@@ -34,34 +19,113 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
     sec_id_img.at(7).load(":/img/oran.png");
     sec_id_img.at(8).load(":/img/yellowboze.png");
     sec_id_img.at(9).load(":/img/whitill.png");
+    sec_id_img.at(10).load(":/img/blank.png");
 
-    ui->label_0->setText(pso_sec_id.at(pso_sum(arg1, 5)));
-    ui->label_1->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(0))));
-    ui->label_2->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(1))));
-    ui->label_3->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(2))));
-    ui->label_4->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(3))));
-    ui->label_5->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(4))));
-    ui->label_6->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(5))));
-    ui->label_7->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(6))));
-    ui->label_8->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(7))));
-    ui->label_9->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(8))));
-    ui->label_10->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(9))));
-    ui->label_11->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(10))));
-    ui->label_12->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(11))));
+    psobb_classval = { 0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8 };
+    pso_sec_id = {"Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum","Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"};
 
-    ui->img_0->setPixmap(sec_id_img.at(pso_sum(arg1, 5)));
-    ui->img_1->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(0))));
-    ui->img_2->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(1))));
-    ui->img_3->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(2))));
-    ui->img_4->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(3))));
-    ui->img_5->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(4))));
-    ui->img_6->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(5))));
-    ui->img_7->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(6))));
-    ui->img_8->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(7))));
-    ui->img_9->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(8))));
-    ui->img_10->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(9))));
-    ui->img_11->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(10))));
-    ui->img_12->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(11))));
+
+    ui->setupUi(this);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::on_lineEdit_textChanged(const QString &arg1)
+{
+    if ((arg1.length() <= 12) && (arg1.length() > 10))
+    {
+        ui->label_0->setText(pso_sec_id.at(pso_sum(arg1, 5)));
+        ui->img_0->setPixmap(sec_id_img.at(pso_sum(arg1, 5)));
+
+        ui->label_1->setText("");
+        ui->label_2->setText("");
+        ui->label_3->setText("");
+        ui->label_4->setText("");
+        ui->label_5->setText("");
+        ui->label_6->setText("");
+        ui->label_7->setText("");
+        ui->label_8->setText("");
+        ui->label_9->setText("");
+        ui->label_10->setText("");
+        ui->label_11->setText("");
+        ui->label_12->setText("");
+
+        ui->img_1->setPixmap(sec_id_img.at(10));
+        ui->img_2->setPixmap(sec_id_img.at(10));
+        ui->img_3->setPixmap(sec_id_img.at(10));
+        ui->img_4->setPixmap(sec_id_img.at(10));
+        ui->img_5->setPixmap(sec_id_img.at(10));
+        ui->img_6->setPixmap(sec_id_img.at(10));
+        ui->img_7->setPixmap(sec_id_img.at(10));
+        ui->img_8->setPixmap(sec_id_img.at(10));
+        ui->img_9->setPixmap(sec_id_img.at(10));
+        ui->img_10->setPixmap(sec_id_img.at(10));
+        ui->img_11->setPixmap(sec_id_img.at(10));
+        ui->img_12->setPixmap(sec_id_img.at(10));
+    }
+    else if ((arg1.length() <= 10) && (arg1.length() > 0))
+    {
+        ui->label_0->setText(pso_sec_id.at(pso_sum(arg1, 5)));
+        ui->label_1->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(0))));
+        ui->label_2->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(1))));
+        ui->label_3->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(2))));
+        ui->label_4->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(3))));
+        ui->label_5->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(4))));
+        ui->label_6->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(5))));
+        ui->label_7->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(6))));
+        ui->label_8->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(7))));
+        ui->label_9->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(8))));
+        ui->label_10->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(9))));
+        ui->label_11->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(10))));
+        ui->label_12->setText(pso_sec_id.at(pso_sum(arg1, psobb_classval.at(11))));
+
+        ui->img_0->setPixmap(sec_id_img.at(pso_sum(arg1, 5)));
+        ui->img_1->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(0))));
+        ui->img_2->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(1))));
+        ui->img_3->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(2))));
+        ui->img_4->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(3))));
+        ui->img_5->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(4))));
+        ui->img_6->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(5))));
+        ui->img_7->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(6))));
+        ui->img_8->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(7))));
+        ui->img_9->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(8))));
+        ui->img_10->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(9))));
+        ui->img_11->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(10))));
+        ui->img_12->setPixmap(sec_id_img.at(pso_sum(arg1, psobb_classval.at(11))));
+    }
+    else
+    {
+        ui->label_0->setText("");
+        ui->label_1->setText("");
+        ui->label_2->setText("");
+        ui->label_3->setText("");
+        ui->label_4->setText("");
+        ui->label_5->setText("");
+        ui->label_6->setText("");
+        ui->label_7->setText("");
+        ui->label_8->setText("");
+        ui->label_9->setText("");
+        ui->label_10->setText("");
+        ui->label_11->setText("");
+        ui->label_12->setText("");
+
+        ui->img_0->setPixmap(sec_id_img.at(10));
+        ui->img_1->setPixmap(sec_id_img.at(10));
+        ui->img_2->setPixmap(sec_id_img.at(10));
+        ui->img_3->setPixmap(sec_id_img.at(10));
+        ui->img_4->setPixmap(sec_id_img.at(10));
+        ui->img_5->setPixmap(sec_id_img.at(10));
+        ui->img_6->setPixmap(sec_id_img.at(10));
+        ui->img_7->setPixmap(sec_id_img.at(10));
+        ui->img_8->setPixmap(sec_id_img.at(10));
+        ui->img_9->setPixmap(sec_id_img.at(10));
+        ui->img_10->setPixmap(sec_id_img.at(10));
+        ui->img_11->setPixmap(sec_id_img.at(10));
+        ui->img_12->setPixmap(sec_id_img.at(10));
+    }
 }
 
 int pso_sum(QString input_str, int cval)
